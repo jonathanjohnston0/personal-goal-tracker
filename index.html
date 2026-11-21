@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Goal Tracker</title>
+<style>
+body{font-family:Arial;background:#f0fdf4;padding:25px}
+main{max-width:600px;margin:auto;background:white;padding:30px;border-radius:16px}
+input[type=text]{width:65%;padding:12px;border:1px solid #86efac;border-radius:8px;box-sizing:border-box}
+button{background:#15803d;color:white;padding:12px;border:0;border-radius:8px;cursor:pointer}
+.goal{display:flex;align-items:center;gap:10px;background:#dcfce7;padding:15px;margin:10px 0;border-radius:8px}
+.goal span{flex:1;overflow-wrap:anywhere}
+.done{text-decoration:line-through;color:gray}
+progress{width:100%;height:22px;accent-color:#16a34a}
+</style>
+</head>
+<body>
+<main>
+<h1>Personal Goal Tracker</h1>
+<p>Set meaningful goals and monitor your progress.</p>
+<input id="goal" type="text" placeholder="Enter a personal goal">
+<button onclick="addGoal()">Add Goal</button>
+<h3 id="summary"></h3>
+<progress id="progress" value="0" max="100"></progress>
+<div id="goals"></div>
+</main>
+<script>
+let goals=JSON.parse(localStorage.getItem("personalGoals")||"[]");
+function save(){
+ localStorage.setItem("personalGoals",JSON.stringify(goals));
+ render();
+}
+function addGoal(){
+ const input=document.getElementById("goal");
+ if(!input.value.trim())return;
+ goals.push({name:input.value.trim(),done:false});
+ input.value="";
+ save();
+}
+function render(){
+ const list=document.getElementById("goals");
+ list.innerHTML="";
+ goals.forEach((goal,i)=>{
+  const row=document.createElement("div");
+  row.className="goal";
+  const check=document.createElement("input");
+  check.type="checkbox";
+  check.checked=goal.done;
+  check.onchange=()=>{
+   goals[i].done=check.checked;
+   save();
+  };
+  const title=document.createElement("span");
+  title.textContent=goal.name;
+  if(goal.done)title.className="done";
+  const del=document.createElement("button");
+  del.textContent="Delete";
+  del.onclick=()=>{
+   goals.splice(i,1);
+   save();
+  };
+  row.append(check,title,del);
+  list.appendChild(row);
+ });
+ const completed=goals.filter(goal=>goal.done).length;
+ const percent=goals.length?Math.round(completed/goals.length*100):0;
+ document.getElementById("summary").textContent=
+ completed+" of "+goals.length+" goals completed ("+percent+"%)";
+ document.getElementById("progress").value=percent;
+}
+render();
+</script>
+</body>
+</html>
