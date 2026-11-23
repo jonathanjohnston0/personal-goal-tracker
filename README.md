@@ -1,23 +1,23 @@
-# Personal Goal Tracker
+## Personal Goal Tracking Guide
 
-An application for managing personal goals.
+This application helps users organize
+and monitor personal goals.
 
-## Features
+### Main Features
 
-- Add goals
-- Mark goals completed
-- Progress tracking
+- Create personal goals
+- Review saved goals
+- Update goal status
+- Track completed goals
 
-## How to Use
+### How to Use
 
-Enter a goal and mark it when completed.
+1. Enter a new goal.
+2. Save the goal.
+3. Update its progress.
+4. Mark it as completed when finished.
 
-## Technologies
+### Organization Tips
 
-- HTML
-- CSS
-- JavaScript
-
-## Running Locally
-
-Open `index.html` in a modern web browser.
+Keep goals clear, specific
+and easy to track.
