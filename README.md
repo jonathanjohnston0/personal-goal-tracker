@@ -21,3 +21,12 @@ and monitor personal goals.
 
 Keep goals clear, specific
 and easy to track.
+## Manual Testing Checklist
+
+- [ ] Create a goal and confirm it appears.
+- [ ] Mark it completed and review the progress percentage.
+- [ ] Delete a goal and verify the total updates.
+
+### Test Notes
+
+Record the observed result and any reproducible issue after running the tests.
